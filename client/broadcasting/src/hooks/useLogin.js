@@ -18,7 +18,7 @@ export default function useLogin () {
 
         const json = response.json();
 
-        console.log('This is json',json)
+        console.log('This is json',JSON.stringify(json))
 
         if(!json){
             setError(json.error)

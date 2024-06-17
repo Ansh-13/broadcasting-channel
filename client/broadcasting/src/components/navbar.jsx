@@ -1,9 +1,11 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import RoomData from "../context/Room"
 import { useAuthContext } from '../hooks/useAuthContext';
 import useLogout from "../hooks/useLogout";
 
 export default function Navbar () {
+
+    //const [username, setusername] = useState('Anonymous')
     
     const {Data} = useContext(RoomData);
     const {user} = useAuthContext();
@@ -11,19 +13,15 @@ export default function Navbar () {
     const {logout} = useLogout();
 
     const handleClick = () => {
+        localStorage.removeItem('RoomData')
         logout();
     }
 
-    console.log(user)
-    var username = '';
-    if(user && user.username){
-        username = user.username
-    }
-    else{
-        username = 'Anonymous'
-    }
+    var username = 'Anonymous'
 
-    
+    if(Data.username != null){
+        username = Data.username
+    }
     
         return (
             <div className="w-screen h-12 mx-4 my-4 flex flex-row justify-between rounded-full p-1 ">
